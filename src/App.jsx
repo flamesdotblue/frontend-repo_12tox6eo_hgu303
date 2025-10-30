@@ -1,28 +1,57 @@
-import { useState } from 'react'
+import HeroScene from './components/HeroScene';
+import DojoOfData from './components/DojoOfData';
+import ProjectsIslands from './components/ProjectsIslands';
+import ContactShip from './components/ContactShip';
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          Vibe Coding Platform
-        </h1>
-        <p className="text-gray-600 mb-6">
-          Your AI-powered development environment
-        </p>
-        <div className="text-center">
-          <button
-            onClick={() => setCount(count + 1)}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-          >
-            Count is {count}
-          </button>
-        </div>
-      </div>
+    <div className="min-h-screen w-full bg-black text-white font-sans">
+      <HeaderNav />
+      <HeroScene />
+      <DojoOfData />
+      <ProjectsIslands />
+      <ContactShip />
+      <Footer />
     </div>
-  )
+  );
 }
 
-export default App
+function HeaderNav() {
+  const scrollTo = (id) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  return (
+    <header className="fixed top-4 left-1/2 z-40 -translate-x-1/2">
+      <nav className="flex items-center gap-2 rounded-full border border-emerald-400/30 bg-black/40 px-3 py-2 backdrop-blur-md">
+        {[
+          { id: 'home', label: 'Home' },
+          { id: 'dojo', label: 'Skills' },
+          { id: 'projects', label: 'Projects' },
+          { id: 'contact', label: 'Contact' },
+        ].map((item) => (
+          <button
+            key={item.id}
+            onClick={() => scrollTo(item.id)}
+            className="rounded-full px-3 py-1.5 text-xs text-emerald-200 hover:bg-emerald-500/10"
+          >
+            {item.label}
+          </button>
+        ))}
+      </nav>
+    </header>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="border-t border-white/10 bg-black/60 py-8 text-center text-xs text-white/60">
+      <div className="mx-auto max-w-6xl px-4">
+        <p>
+          © {new Date().getFullYear()} J. Mohan Karthikeya — ZoroVerse: The Swordsman of Data. Crafted with React, Tailwind, Framer Motion, and Spline.
+        </p>
+      </div>
+    </footer>
+  );
+}
