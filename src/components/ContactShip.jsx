@@ -1,10 +1,22 @@
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Mail, FileDown, Image as ImageIcon } from 'lucide-react';
 
 export default function ContactShip() {
+  const [isNight, setIsNight] = useState(false);
+
+  useEffect(() => {
+    const toggle = () => setIsNight((v) => !v);
+    const id = setInterval(toggle, 60_000); // 60s day-night cycle
+    return () => clearInterval(id);
+  }, []);
+
   return (
-    <section id="contact" className="relative overflow-hidden bg-gradient-to-b from-black via-[#0a0f0e] to-black py-20 text-white">
-      <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 20% 10%, rgba(16,185,129,0.14), transparent 40%), radial-gradient(circle at 80% 80%, rgba(16,185,129,0.12), transparent 45%)' }} />
+    <section id="contact" className="relative overflow-hidden py-24 text-white" style={{
+      background: isNight
+        ? 'radial-gradient(80% 60% at 80% 20%, rgba(147,197,253,0.1), transparent), linear-gradient(#020617, #0a0f0e)'
+        : 'radial-gradient(80% 60% at 20% 10%, rgba(253,186,116,0.1), transparent), linear-gradient(#06231f, #0a0f0e)'
+    }}>
       <div className="relative mx-auto max-w-6xl px-4">
         <motion.h2
           className="font-[Cinzel] text-2xl sm:text-4xl font-bold text-emerald-300"
@@ -13,7 +25,7 @@ export default function ContactShip() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          The Thousand Data Sunny
+          Thousand Data Sunny
         </motion.h2>
         <p className="mt-2 text-sm text-emerald-200/70">Set sail to connect. Choose your course.</p>
 
@@ -36,6 +48,15 @@ export default function ContactShip() {
           </form>
         </div>
       </div>
+
+      {/* Stars at night */}
+      {isNight && (
+        <div className="pointer-events-none absolute inset-0">
+          {Array.from({ length: 40 }).map((_, i) => (
+            <span key={i} className="absolute h-0.5 w-0.5 rounded-full bg-white/90" style={{ left: `${(i * 53) % 100}%`, top: `${(i * 31) % 100}%`, opacity: 0.8 }} />
+          ))}
+        </div>
+      )}
     </section>
   );
 }

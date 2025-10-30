@@ -49,7 +49,7 @@ function Footer() {
     <footer className="border-t border-white/10 bg-black/60 py-8 text-center text-xs text-white/60">
       <div className="mx-auto max-w-6xl px-4">
         <p>
-          © {new Date().getFullYear()} J. Mohan Karthikeya — ZoroVerse: The Swordsman of Data. Crafted with React, Tailwind, Framer Motion, and Spline.
+          © {new Date().getFullYear()} J. Mohan Karthikeya — ZoroVerse 2.0. Forged with React, Tailwind, Framer Motion, and Spline.
         </p>
       </div>
     </footer>
